@@ -29,6 +29,57 @@ defmodule GenReport.Sum do
     end)
   end
 
+  def sum_reports(
+        %{
+          "all_hours" => all_hours1,
+          "hours_per_month" => hours_per_month1,
+          "hours_per_year" => hours_per_year1
+        },
+        %{
+          "all_hours" => all_hours2,
+          "hours_per_month" => hours_per_month2,
+          "hours_per_year" => hours_per_year2
+        }
+      ) do
+    all_hours = margin_maps_without_map(all_hours1, all_hours2)
+    hours_per_month = margin_maps_with_map(hours_per_month1, hours_per_month2)
+    hours_per_year = margin_maps_with_map(hours_per_year1, hours_per_year2)
+
+    report_map(all_hours, hours_per_month, hours_per_year)
+  end
+
+  defp margin_maps_with_map(map1, map2) do
+    case map_size(map1) do
+      0 ->
+        map2
+
+      _ ->
+        Enum.reduce(map1, %{}, fn {name, months}, acc ->
+          month_values =
+            Enum.reduce(months, %{}, fn {month, hours}, acc2 ->
+              Map.put(acc2, month, hours + map2[name][month])
+            end)
+
+          Map.put(acc, name, month_values)
+        end)
+    end
+  end
+
+  defp margin_maps_without_map(map1, map2) do
+    case map_size(map1) do
+      0 ->
+        map2
+
+      _ ->
+        Enum.reduce(map1, %{}, fn {key, value}, acc ->
+          case Map.get(map2, key) do
+            nil -> acc
+            other_value -> Map.put(acc, key, value + other_value)
+          end
+        end)
+    end
+  end
+
   defp report_map(all_hours, hours_per_month, hours_per_year) do
     %{
       "all_hours" => all_hours,
