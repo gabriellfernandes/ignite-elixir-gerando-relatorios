@@ -4,18 +4,25 @@
   "invalid": [],
   "passed": [
     {
+      "describe": "parse_file/1",
+      "file": "/home/rick/project_elixir/ignite-elixir-gerando-relatorios/test/parser_test.exs",
+      "line": 7,
+      "module": "Elixir.GenReport.ParserTest",
+      "test": "test parse_file/1 parses the file"
+    },
+    {
+      "describe": "build_many/1",
+      "file": "/home/rick/project_elixir/ignite-elixir-gerando-relatorios/test/gen_report_test.exs",
+      "line": 24,
+      "module": "Elixir.GenReportTest",
+      "test": "test build_many/1 When passing files names return a report"
+    },
+    {
       "describe": "build/1",
       "file": "/home/rick/project_elixir/ignite-elixir-gerando-relatorios/test/gen_report_test.exs",
       "line": 16,
       "module": "Elixir.GenReportTest",
       "test": "test build/1 When no filename was given, returns an error"
-    },
-    {
-      "describe": "build_many/1",
-      "file": "/home/rick/project_elixir/ignite-elixir-gerando-relatorios/test/gen_report_test.exs",
-      "line": 31,
-      "module": "Elixir.GenReportTest",
-      "test": "test build_many/1 When no files names was given, returns an error"
     },
     {
       "describe": "build/1",
@@ -27,16 +34,9 @@
     {
       "describe": "build_many/1",
       "file": "/home/rick/project_elixir/ignite-elixir-gerando-relatorios/test/gen_report_test.exs",
-      "line": 24,
+      "line": 31,
       "module": "Elixir.GenReportTest",
-      "test": "test build_many/1 When passing files names return a report"
-    },
-    {
-      "describe": "parse_file/1",
-      "file": "/home/rick/project_elixir/ignite-elixir-gerando-relatorios/test/parser_test.exs",
-      "line": 7,
-      "module": "Elixir.GenReport.ParserTest",
-      "test": "test parse_file/1 parses the file"
+      "test": "test build_many/1 When no files names was given, returns an error"
     }
   ],
   "skiped": []

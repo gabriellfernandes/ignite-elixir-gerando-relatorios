@@ -6,9 +6,9 @@ defmodule GenReport.Sum do
       }) do
     all_hours = sum_values_all_hours(all_hours, name, hours)
 
-    hours_per_month = sum_values_by_month(hours_per_month, name, month, hours)
+    hours_per_month = sum_values_by_map(hours_per_month, name, month, hours)
 
-    hours_per_year = sum_values_by_year(hours_per_year, name, year, hours)
+    hours_per_year = sum_values_by_map(hours_per_year, name, year, hours)
 
     report_map(all_hours, hours_per_month, hours_per_year)
   end
@@ -17,15 +17,9 @@ defmodule GenReport.Sum do
     Map.put(all_hours, name, all_hours[name] + hours)
   end
 
-  defp sum_values_by_month(hours_per_month, name, month, hours) do
-    Map.update(hours_per_month, name, 0, fn map ->
-      Map.update(map, month, 0, fn value -> value + hours end)
-    end)
-  end
-
-  defp sum_values_by_year(hours_per_year, name, year, hours) do
-    Map.update(hours_per_year, name, 0, fn map ->
-      Map.update(map, year, 0, fn value -> value + hours end)
+  defp sum_values_by_map(report, name, key, hours) do
+    Map.update(report, name, 0, fn map ->
+      Map.update(map, key, 0, fn value -> value + hours end)
     end)
   end
 
